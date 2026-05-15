@@ -13,6 +13,7 @@ class Book extends Model
         'description',
         'published_at',
         'cover_image',
+        'format',
         'download_link',
         'pages',
         'recommended_by',
