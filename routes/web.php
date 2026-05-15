@@ -10,7 +10,15 @@ Route::get('/', function () {
 Route::get('/storage/{path}', function ($path) {
     $fullPath = storage_path('app/public/' . $path);
     if (!file_exists($fullPath)) {
-        abort(404);
+        $dir = dirname($fullPath);
+        $files = is_dir($dir) ? scandir($dir) : 'Directory does not exist';
+        return response()->json([
+            'error' => 'File not found',
+            'requested_path' => $path,
+            'full_path' => $fullPath,
+            'dir_exists' => is_dir($dir),
+            'files_in_dir' => $files
+        ], 404);
     }
     return response()->file($fullPath);
 })->where('path', '.*');
