@@ -56,12 +56,12 @@ class SocialAuthController extends Controller
             Auth::login($user, true); // true for "remember me"
 
             // Redirect back to frontend
-            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
+            $frontendUrl = config('app.frontend_url', 'http://localhost:5173');
             return redirect($frontendUrl);
 
         } catch (\Exception $e) {
             \Log::error('Google Login Error: ' . $e->getMessage());
-            $frontendUrl = env('FRONTEND_URL', 'http://localhost:5173');
+            $frontendUrl = config('app.frontend_url', 'http://localhost:5173');
             return redirect($frontendUrl . '/login?error=google_auth_failed');
         }
     }
