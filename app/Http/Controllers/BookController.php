@@ -25,6 +25,9 @@ class BookController extends Controller
         if (is_string($request->tags)) {
             $request->merge(['tags' => json_decode($request->tags, true)]);
         }
+        if (is_string($request->links)) {
+            $request->merge(['links' => json_decode($request->links, true)]);
+        }
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -38,9 +41,14 @@ class BookController extends Controller
             'pages' => 'nullable|integer|min:1',
             'recommended_by' => 'nullable|string|max:255',
             'loaned_to' => 'nullable|string|max:255',
-            'format' => 'nullable|string|in:physical,virtual,both',
+            'format' => 'nullable|string|in:physical,virtual,both,borrowed',
             'reading_status' => 'nullable|string|in:queued,reading,standby,completed,incomplete',
             'summary' => 'nullable|string',
+            'reading_notes' => 'nullable|string',
+            'lent_by' => 'nullable|string|max:255',
+            'links' => 'nullable|array',
+            'links.*.title' => 'required_with:links|string|max:255',
+            'links.*.url' => 'required_with:links|string|max:2048',
         ]);
 
         if ($request->hasFile('cover_image')) {
@@ -85,6 +93,9 @@ class BookController extends Controller
         if (is_string($request->tags)) {
             $request->merge(['tags' => json_decode($request->tags, true)]);
         }
+        if (is_string($request->links)) {
+            $request->merge(['links' => json_decode($request->links, true)]);
+        }
 
         $validated = $request->validate([
             'title' => 'string|max:255',
@@ -98,9 +109,14 @@ class BookController extends Controller
             'pages' => 'nullable|integer|min:1',
             'recommended_by' => 'nullable|string|max:255',
             'loaned_to' => 'nullable|string|max:255',
-            'format' => 'nullable|string|in:physical,virtual,both',
+            'format' => 'nullable|string|in:physical,virtual,both,borrowed',
             'reading_status' => 'nullable|string|in:queued,reading,standby,completed,incomplete',
             'summary' => 'nullable|string',
+            'reading_notes' => 'nullable|string',
+            'lent_by' => 'nullable|string|max:255',
+            'links' => 'nullable|array',
+            'links.*.title' => 'required_with:links|string|max:255',
+            'links.*.url' => 'required_with:links|string|max:2048',
         ]);
 
         if ($request->hasFile('cover_image')) {

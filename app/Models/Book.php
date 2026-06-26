@@ -21,6 +21,13 @@ class Book extends Model
         'author_id',
         'reading_status',
         'summary',
+        'reading_notes',
+        'lent_by',
+        'links',
+    ];
+
+    protected $casts = [
+        'links' => 'array',
     ];
 
     public function user()
