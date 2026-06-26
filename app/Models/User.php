@@ -63,4 +63,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Author::class);
     }
+
+    public function communities()
+    {
+        return $this->belongsToMany(Community::class, 'community_user')
+                    ->withPivot('role', 'status', 'joined_at')
+                    ->withTimestamps();
+    }
+
+    public function acceptedCommunities()
+    {
+        return $this->communities()->wherePivot('status', 'accepted');
+    }
 }

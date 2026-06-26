@@ -19,6 +19,8 @@ class Book extends Model
         'recommended_by',
         'loaned_to',
         'author_id',
+        'reading_status',
+        'summary',
     ];
 
     public function user()

@@ -39,6 +39,8 @@ class BookController extends Controller
             'recommended_by' => 'nullable|string|max:255',
             'loaned_to' => 'nullable|string|max:255',
             'format' => 'nullable|string|in:physical,virtual,both',
+            'reading_status' => 'nullable|string|in:queued,reading,standby,completed,incomplete',
+            'summary' => 'nullable|string',
         ]);
 
         if ($request->hasFile('cover_image')) {
@@ -97,6 +99,8 @@ class BookController extends Controller
             'recommended_by' => 'nullable|string|max:255',
             'loaned_to' => 'nullable|string|max:255',
             'format' => 'nullable|string|in:physical,virtual,both',
+            'reading_status' => 'nullable|string|in:queued,reading,standby,completed,incomplete',
+            'summary' => 'nullable|string',
         ]);
 
         if ($request->hasFile('cover_image')) {
