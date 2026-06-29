@@ -24,6 +24,7 @@ class Book extends Model
         'reading_notes',
         'lent_by',
         'links',
+        'queue_order',
     ];
 
     protected $casts = [

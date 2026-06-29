@@ -158,6 +158,26 @@ class BookController extends Controller
     }
 
     /**
+     * Reorder the reading queue.
+     */
+    public function reorderQueue(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'integer|exists:books,id',
+        ]);
+
+        $ids = $request->ids;
+        foreach ($ids as $index => $id) {
+            Book::where('id', $id)
+                ->where('user_id', Auth::id())
+                ->update(['queue_order' => $index + 1]);
+        }
+
+        return response()->json(['message' => 'Cola reordenada correctamente']);
+    }
+
+    /**
      * Helper to find or create tags for the user.
      */
     private function syncTags(array $tagNames): array

@@ -13,6 +13,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return $request->user();
     });
 
+    Route::post('/books/reorder-queue', [BookController::class, 'reorderQueue']);
     Route::apiResource('books', BookController::class);
     Route::apiResource('tags', TagController::class)->only(['index', 'store', 'destroy']);
     Route::apiResource('authors', AuthorController::class);
